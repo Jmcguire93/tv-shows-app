@@ -4,6 +4,11 @@ class ShowsController < ApplicationController
     render json: shows
   end
 
+  def show
+    show = Show.find_by(id: params[:id])
+    render json: show
+  end
+
   def create
     show = Show.new(
       title: params[:title],
@@ -18,14 +23,14 @@ class ShowsController < ApplicationController
       user_id: params[:user_id],
       # user_id: current_user.id,
     )
-    show.save
-    render json: show
+    if show.save
+      render json: show
+    else
+      render json: {errors: show.errors.full_messages}, 
+      status: 422
+    end
   end
 
-  def show
-    show = Show.find_by(id: params[:id])
-    render json: show
-  end
 
   def update
     show_id = params[:id]
