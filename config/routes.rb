@@ -30,4 +30,8 @@ Rails.application.routes.draw do
   post "/genres" => "genres#create"
   patch "/genres/:id" => "genres#update"
   delete "/genres/:id" => "genres#destroy"
+
+  ## Sessions
+
+  post "/sessions" => "sessions#create"
 end
