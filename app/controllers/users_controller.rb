@@ -28,8 +28,13 @@ class UsersController < ApplicationController
     user.name = params[:name] || user.name
     user.email = params[:email] || user.email
     user.password_confirmation = params[:password_confirmation] || user.password_confirmation
-    user.save
-    render json: user
+    
+    if user.save
+      render json: user
+    else
+      render json: {errors: user.errors.full_messages}, 
+      status: 422
+    end
   end
 
   def destroy

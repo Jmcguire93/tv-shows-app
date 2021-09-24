@@ -27,8 +27,12 @@ class ActorsController < ApplicationController
     actor.gender = params[:gender] || actor.gender
     actor.hometown = params[:hometown] || actor.hometown
 
-    actor.save
-    render json: actor
+    if actor.save
+      render json: actor
+    else
+      render json: {errors: actor.errors.full_messages}, 
+      status: 422
+    end
   end
 
   def destroy

@@ -28,7 +28,9 @@ class ShowsController < ApplicationController
   end
 
   def update
-    show = Show.find_by(id: params[:id])
+    show_id = params[:id]
+
+    show = Show.find_by(id: show_id)
     show.title = params[:title] || show.title
     show.year = params[:year] || show.year
     show.description = params[:description] || show.description
@@ -37,8 +39,13 @@ class ShowsController < ApplicationController
     show.network = params[:network] || show.network
     show.favorite = params[:favorite] || show.favorite
     show.user_id = params[:user_id] || show.user_id
-    show.save
-    render json: show
+    
+    if show.save
+      render json: show
+    else
+      render json: {errors: show.errors.full_messages}, 
+      status: 422
+    end
   end
 
   def destroy
