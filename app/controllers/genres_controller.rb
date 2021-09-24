@@ -1,6 +1,6 @@
 class GenresController < ApplicationController
   def index
     genres = Genre.all
-    render json: genres.as_json
+    render json: genres
   end
 end
