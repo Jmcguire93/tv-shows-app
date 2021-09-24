@@ -6,8 +6,7 @@ class UsersController < ApplicationController
   
   def create
     user = User.new(
-      first_name: params[:first_name],
-      last_name: params[:last_name],
+      name: params[:name],
       email: params[:email],
       password_confirmation: params[:password_confirmation],
     )
@@ -22,8 +21,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find_by(id: params[:id])
-    user.first_name = params[:first_name] || user.first_name
-    user.last_name = params[:last_name] || user.last_name
+    user.name = params[:name] || user.name
     user.email = params[:email] || user.email
     user.password_confirmation = params[:password_confirmation] || user.password_confirmation
     user.save
