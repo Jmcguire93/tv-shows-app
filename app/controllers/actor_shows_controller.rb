@@ -15,7 +15,7 @@ class ActorShowsController < ApplicationController
       show_id: params[:show_id],
     )
     if actor_shows.save
-      render json: { message: “ActorShows created successfully.” }, status: :created
+      render json: { message: "ActorShows created successfully." }, status: :created
     else
       render json: { errors: actor_shows.errors.full_messages }, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class ActorShowsController < ApplicationController
     actor_shows.show_id = params[:show_id] || actor.show_id
     
     if actor_shows.save
-      render json: { message: “ActorShows updated successfully.” }
+      render json: { message: "ActorShows updated successfully." }
     else
       render json: { errors: actor_shows.errors.full_messages }, status: :unprocessable_entity
     end
@@ -36,6 +36,6 @@ class ActorShowsController < ApplicationController
   def destroy
     actor_shows = ActorShow.find_by(id: params[:id])
     actor_shows.destroy
-    render json: { message: “ActorShows successfully destroyed.” }
+    render json: { message: "ActorShows successfully destroyed." }
   end
 end
